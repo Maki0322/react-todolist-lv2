@@ -1,0 +1,14 @@
+header {
+  display: flex;
+}
+
+.logout-button {
+  display: block;
+  margin-left: auto;
+  width: 100px;
+}
+.add-todolist {
+  margin: auto;
+  width: 500px;
+  background-color: rgb(210 210 210);
+}
