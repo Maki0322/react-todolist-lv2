@@ -9,6 +9,7 @@ import TodoList from "./todoList/TodoList";
 import { collection, getDocs } from "firebase/firestore"
 import "./home.css"
 
+
 const Home = () => {
   // サインアウトしているとログイン画面に遷移する
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Home = () => {
     navigate('/login');
   };
 
+  // TODOリストをfirebaseのtodoというコレクションに追加する
   const [todos, setTodos] = useState([]);
   useEffect(() => {
     const postData = collection(db, "todo");
@@ -24,7 +26,7 @@ const Home = () => {
       setTodos(querySnapshot.docs.map((doc) => doc.data()))
     });
   }, [])
-
+  
   return (
     <div>
       <button className="logout-button" onClick={handleLogout}>ログアウト</button>
@@ -35,15 +37,16 @@ const Home = () => {
 
 
       {/* TODOリストの内容を表示する部分 */}
-      {todos.map((todo) => (
+      {todos.map((todo) => (  
           <TodoList 
-            key={todo.text}
+            key={todo.id}
+            id={todo.id}
             text={todo.text}
             limit={todo.limit}
             detail={todo.detail}
         />
       ))}
-      
+  
 
      
     </div>
