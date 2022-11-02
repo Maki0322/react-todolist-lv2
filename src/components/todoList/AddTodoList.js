@@ -6,6 +6,7 @@ import "./AddTodoList.css"
 import { collection, addDoc } from "firebase/firestore"
 import { db } from "../../firebase.js"
 import 'firebase/firestore';
+import UUID from 'uuidjs';
 
 function AddTodoList() {
   const [addTodoText, setAddTodoText] = useState("");
@@ -18,6 +19,8 @@ function AddTodoList() {
   const limitDateTime = Date.parse(lim)
   const limit = new Date(limitDateTime);
 
+  const docId = UUID.generate();
+
   const sendTodo = (e) => {
     // firebaseのデータベースにデータを追加する。
 
@@ -28,6 +31,7 @@ function AddTodoList() {
       text:addTodoText,
       limit:limit,
       detail:addTodoDetail,
+      id:docId,
     });
   }
 
