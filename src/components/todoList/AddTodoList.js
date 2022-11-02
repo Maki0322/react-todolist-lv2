@@ -3,7 +3,7 @@ import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import "./AddTodoList.css"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, doc, setDoc } from "firebase/firestore"
 import { db } from "../../firebase.js"
 import 'firebase/firestore';
 import UUID from 'uuidjs';
@@ -20,19 +20,20 @@ function AddTodoList() {
   const limit = new Date(limitDateTime);
 
   const docId = UUID.generate();
-
+  
+  // firebaseのデータベースにデータを追加する。
   const sendTodo = (e) => {
-    // firebaseのデータベースにデータを追加する。
-
     // 送信ボタンを押したときに、画面がリロードしないようにpreventDefaultが必要。
     e.preventDefault();
-
-    addDoc(collection(db, "todo"), {
+    // ブラウザ上で記入したTODOリストをfirebaseに送信
+    const docRef = doc(db, "todo", docId);
+    const data = {
       text:addTodoText,
       limit:limit,
       detail:addTodoDetail,
       id:docId,
-    });
+    }
+    setDoc(docRef, data); 
   }
 
   return (
