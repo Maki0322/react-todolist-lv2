@@ -3,7 +3,7 @@ import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import "./AddTodoList.css"
-import { collection, addDoc, doc, setDoc } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
 import { db } from "../../firebase.js"
 import 'firebase/firestore';
 import UUID from 'uuidjs';
@@ -34,11 +34,21 @@ function AddTodoList() {
       id:docId,
     }
     setDoc(docRef, data); 
+
   }
+
+
+  // ユーザーごとにデータの読み書きの権限さえ分離させたい
+
+
+
+
 
   return (
     <div>
-      <label className='open' htmlFor="pop-up">タスクを追加する<NoteAltIcon /></label>
+      <button>
+        <label className='open' htmlFor="pop-up">タスクを追加</label>
+      </button>
       <input  type="checkbox" id="pop-up"/>
       <div className='overlay'>
         <div className='window'>

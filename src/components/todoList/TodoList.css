@@ -3,6 +3,12 @@ li {
   background-color: rgb(230 230 230);
 }
 
+button {
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
 .todolist-index {
   width: auto;
   display: flex;

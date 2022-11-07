@@ -35,7 +35,6 @@ const Home = () => {
         <AddTodoList/>
       </div>
 
-
       {/* TODOリストの内容を表示する部分 */}
       {todos.map((todo) => (  
           <TodoList 
@@ -45,10 +44,7 @@ const Home = () => {
             limit={todo.limit}
             detail={todo.detail}
         />
-      ))}
-  
-
-     
+      ))}     
     </div>
   );
 };
