@@ -10,6 +10,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
 import { EditTodoList } from './EditTodoList';
 import { ThirtyFpsRounded } from '@mui/icons-material';
+import React, { useEffect } from 'react'
 
 
 function TodoList({text, limit, detail, id, state}) {
@@ -39,14 +40,14 @@ function TodoList({text, limit, detail, id, state}) {
     setEditTodoState(e.target.value);
   };
   // stateのプルダウンの内容をfirebaseに送信する関数（クリックするたびに送信）
-  const sendTodoState = (e) => {
-    e.preventDefault();
+  const sendTodoState = useEffect(() => {
+    // e.preventDefault();
     const docId = id;
     const docEdit = doc(db, "todo", docId);
     updateDoc(docEdit, {
       state:editTodoState
     })
-  }
+  },[editTodoState])
   
   return (
     <div>

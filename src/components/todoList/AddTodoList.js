@@ -21,7 +21,10 @@ function AddTodoList() {
 
   const docId = UUID.generate();
   
-  // firebaseのデータベースにデータを追加する。
+
+
+
+  // firebaseのデータベースにデータを送信（追加）する。
   const sendTodo = (e) => {
     // 送信ボタンを押したときに、画面がリロードしないようにpreventDefaultが必要。
     e.preventDefault();
@@ -35,7 +38,6 @@ function AddTodoList() {
       state:"未着手"
     }
     setDoc(docRef, data); 
-
   }
 
 
