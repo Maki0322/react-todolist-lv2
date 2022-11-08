@@ -32,6 +32,7 @@ function AddTodoList() {
       limit:limit,
       detail:addTodoDetail,
       id:docId,
+      state:"未着手"
     }
     setDoc(docRef, data); 
 

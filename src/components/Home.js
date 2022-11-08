@@ -43,6 +43,7 @@ const Home = () => {
             text={todo.text}
             limit={todo.limit}
             detail={todo.detail}
+            state={todo.state}
         />
       ))}     
     </div>
