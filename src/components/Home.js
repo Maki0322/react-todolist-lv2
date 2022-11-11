@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
@@ -7,6 +7,8 @@ import AddTodoList from "./todoList/AddTodoList";
 import TodoList from "./todoList/TodoList";
 import { collection, getDocs } from "firebase/firestore"
 import "./home.css"
+
+export const userIdInfo = createContext();
 
 const Home = () => {
   // サインアウトしているとログイン画面に遷移する
@@ -22,11 +24,13 @@ const Home = () => {
   // TODOリストをfirebaseのtodoというコレクションに追加する
   useEffect(() => {
     const postData = collection(db, "todo");
+    // if(auth.currentUser.uid == )
     getDocs(postData).then((querySnapshot) => {
       setTodos(querySnapshot.docs.map((doc) => doc.data()))
     });
   }, [])
   
+
   // 【フィルターボタン（<select>タグ）を実装】
   // フィルターボタンのプルダウンの内容
   const filterState = ["すべて", "未着手", "進行中", "完了"];
@@ -50,7 +54,7 @@ const Home = () => {
       }))
     }     
   }, [todos, filterTodo])
-  
+
   return (
     <div>
       <button className="logout-button" onClick={handleLogout}>ログアウト</button>
@@ -67,7 +71,6 @@ const Home = () => {
           ))}
         </select>
       </div>
-      
       {/* TODOリストの内容を表示する部分 */}
       {filteredTodoLists.map((todo) => (  
           <TodoList 

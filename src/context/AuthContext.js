@@ -18,14 +18,6 @@ export function AuthProvider({ children }) {
     loading,
   };
 
-  // useEffect(() => {
-  //   const unsubscribed = onAuthStateChanged(auth, (user) => {
-  //     setUser(user);
-  //     setLoading(false);
-  //   });
-  //   unsubscribed();
-  // }, []);
-
   useEffect(() => {
     const unsubscribed = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -35,6 +27,9 @@ export function AuthProvider({ children }) {
       unsubscribed();
     };
   }, []);
+
+
+
   
   return <AuthContext.Provider value={value}>
     {!loading && children}

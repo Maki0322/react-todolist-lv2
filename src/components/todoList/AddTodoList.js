@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import "./AddTodoList.css"
 import { doc, setDoc } from "firebase/firestore"
-import { db } from "../../firebase.js"
+import { auth, db } from "../../firebase.js"
 import 'firebase/firestore';
 import UUID from 'uuidjs';
 
@@ -22,29 +21,23 @@ function AddTodoList() {
   const docId = UUID.generate();
   
 
-
-
-  // firebaseのデータベースにデータを送信（追加）する。
+  // 【firebaseのデータベースにデータを送信（追加）する】
   const sendTodo = (e) => {
     // 送信ボタンを押したときに、画面がリロードしないようにpreventDefaultが必要。
     e.preventDefault();
-    // ブラウザ上で記入したTODOリストをfirebaseに送信
+    // コレクションは"users"でその中にサブコレクションとして"todos"を作る
     const docRef = doc(db, "todo", docId);
+    // ブラウザ上で記入したTODOリストをfirebaseに送信
     const data = {
       text:addTodoText,
       limit:limit,
       detail:addTodoDetail,
       id:docId,
-      state:"未着手"
+      state:"未着手",
+      userId:auth.currentUser.uid,
     }
-    setDoc(docRef, data); 
+    setDoc(docRef, data);
   }
-
-
-  // ユーザーごとにデータの読み書きの権限さえ分離させたい
-
-
-
 
 
   return (
@@ -99,11 +92,6 @@ function AddTodoList() {
           </div>
         </div>
       </div>
-
-
-
-
-
     </div>
   )
 }

@@ -1,41 +1,138 @@
 li {
-  margin-bottom: 20px;
+  list-style: none;
   background-color: rgb(230 230 230);
+  border-radius: 10px;
+  padding: 0;
+  min-width: 750px;
+}
+
+.todolist-index {
+  display: flex;
+  padding-right: 10px;
 }
 
 button {
   border: none;
   cursor: pointer;
   margin-right: 10px;
+  border-radius: 8px;
+}
+button:hover {
+  background-color: rgba(206, 255, 0, 0.7);
 }
 
 .todolist-index {
-  width: auto;
+  /* width: auto; */
+  min-width: 500px;
   display: flex;
   align-items: center;
   padding: 0;
   margin: 0;
 }
 
-.todolist-title {
+.todolist-text {
+  font-size: 16px;
+  margin: 0 10px;
+  min-width: 350px;
+  margin-right: auto;
+  padding-right: 20px;
+}
+
+.todolist-limit  {
+  font-size: 14px;
+  margin-right: 10px;
+  min-width: 145px;
+}
+.todolist-limit p {
+  /* border: solid 1px rgba(206, 255, 0, 0.7); */
+  background-color: rgb(240 240 240);
+  border-radius: 8px;
+  padding: 3.5px;
+}
+
+/* TODOのstateのselect box */
+.state-select {
+  border-radius: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; 
+  width: 70px; /* セレクトボックスの幅 */
+  height: 30px; /* セレクトボックスの高さ */
+  background-color: rgb(240 240 240);  /* セレクトボックスの背景色 */
+  border: none; /* セレクトボックスのデフォルトの枠線を消す */
+  border-radius: 5px;  /* セレクトボックスの四隅の丸み */
+  color: #58504A;  /* セレクトボックスの文字色 */
+  padding: 5px; /* セレクトボックスの内側の余白 */
+  cursor: pointer;
+}
+select:focus {
+  outline: none; /* focus 時のデフォルトの枠線を消す */
+}
+::-ms-expand {
+  display: none;
+}
+.state-select:hover {
+  background-color: rgba(206, 255, 0, 0.7);
+}
+.state-select-box {
+  position: relative;
+  width: 70px;
   margin-right: 10px;
 }
-
-.todolist-status {
-  font-size: 12px;
+.state-select-box::after {
+  position: absolute;
+  top: 30%; /* 矢印の位置 */
+  right: 10px; /* 矢印の位置 */
+  width: 6px; /* 矢印の大きさ */
+  height: 6px; /* 矢印の大きさ */
+  border-top: 2px solid #58504A; /* 矢印の線 */
+  border-right: 2px solid #58504A; /* 矢印の線 */
+  -webkit-transform: rotate(135deg); /* 矢印の傾き */
+  transform: rotate(135deg); /* 矢印の傾き */
+  pointer-events: none; /* 矢印部分もクリック可能にする */
+  content: ""; 
 }
 
-.todolist-status-button {
-  font-size: 10px;
-  transform: rotate(270deg)
-}
 
-.todolist-limit {
-  font-size: 12px;
-  margin-right: 10px;
-}
+
 
 .todolist-details-bottun {
   margin-left: auto;
-  transform: rotate(270deg)
+  transform: rotate(270deg) translateY(50%);
+}
+
+
+/* アコーディオンメニュー */
+.icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s;
+}
+.detail-button {
+  transform: rotate(270deg);
+  transition: 0.3s ;
+  padding-top: 4px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+.detail-button:hover {
+  background-color: rgba(206, 255, 0, 0.7);
+  padding-top: 4px;
+  border-radius: 8px;
+}
+.detail-button-reverse {
+  transform: rotate(90deg);
+  background-color: rgba(206, 255, 0, 0.7);
+  transition: 0.3s ;
+  padding-top: 4px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+.todo-detail {
+  padding: 10px;
+  font-size: 14px;
 }

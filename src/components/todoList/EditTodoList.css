@@ -12,6 +12,7 @@ input {
   height:100%;
   background-color:rgba(0,0,0,0.5);
 
+  z-index:2;
   /*画面の中央に要素を表示させる設定*/
   display: flex;
   align-items: center;
@@ -20,7 +21,7 @@ input {
 }
 
 #content{
-  z-index:2;
+  z-index:3;
   width:50%;
   padding: 1em;
   background:#fff;

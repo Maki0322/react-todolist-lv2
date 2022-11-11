@@ -46,6 +46,7 @@ export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id
     });
   }
   
+
   if (editShow) {
     return (
       <div id="overlay" onClick={closeEditModal}>
