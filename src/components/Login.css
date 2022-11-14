@@ -1,0 +1,69 @@
+.login-form {
+  width:300px;
+  margin:100px auto;
+  border-radius: 10px;
+}
+.login-header {
+  padding: 10px 20px;
+  width:300px;
+  background-color: rgb(150, 150, 150);
+  font-size: 20px;
+  color: rgb(253, 253, 253);
+  font-weight: bold;
+}
+.login-form-contents {
+  width:300px;
+  padding: 20px;
+  background-color: rgb(240, 240, 240);
+}
+.input-email-area {
+  width: 90%;
+}
+.input-email input {
+  width: 285px;
+  background-color: rgb(253, 253, 253);
+	padding: 6px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	border-radius: 8px;
+	outline: none;
+}
+.input-password-area {
+  width: 90%;
+}
+.input-password input {
+  width: 285px;
+  background-color: rgb(253, 253, 253);
+	padding: 6px;
+	margin-bottom: 15px;
+	font-size: 16px;
+	border-radius: 8px;
+	outline: none;
+}
+.login-button button {
+  margin-bottom: 15px;
+  background-color:rgb(230, 230, 230);
+  width: auto;
+  height: 30px;  
+}
+.login-button button:hover {
+  background-color: rgba(206, 255, 0, 0.95);
+  transition: 0.3s;
+  font-weight: bolder;
+
+} 
+.link-to-signup-area {
+  font-size: 14px;
+}
+.link-to-signup {
+  color: RGB(100, 100, 100);
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(206, 255, 0, 0.95);
+  
+}
+.link-to-signup:hover {
+  background-color: rgba(206, 255, 0, 0.95);
+  border-radius: 8px;
+  transition: 0.3s;
+}

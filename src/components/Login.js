@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import "./Login.css"
 
 
 const Login = () => {
@@ -35,35 +36,50 @@ const Login = () => {
 
   return (
     <div>
-      <h1>ログイン</h1>
+      <div className="login-form">
+        <div className="login-header">
+          ログイン
+        </div>
+        <div className="login-form-contents">
 
-      <form onSubmit={handleSubmit}>
-        {error && <p style={{color: 'red'}}>{error}</p>}
-        <div>
-          <label htmlFor="email">メールアドレス</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="email"
-          />
+          <form onSubmit={handleSubmit}>
+            {error && <p style={{color: 'red'}}>{error}</p>}
+            <div className="input-email-area">
+              <div className="input-email-label">
+                <label htmlFor="email">メールアドレス</label>
+              </div>
+              <div className="input-email">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="email"
+                />
+              </div>
+            </div>
+            <div className="input-password-area">
+              <div className="input-password-label">
+                <label htmlFor="password">パスワード</label>
+              </div>
+              <div className="input-password">
+                <input 
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="password"
+                />
+              </div>
+            </div>
+            <div className="login-button">
+              <button>ログイン</button>
+            </div>
+            <div className="link-to-signup-area">
+              ユーザー登録は<Link to={'/signup'} className="link-to-signup">  こちら  </Link>から
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="password">パスワード</label>
-          <input 
-            id="password"
-            name="password"
-            type="password"
-            placeholder="password"
-          />
-        </div>
-        <div>
-          <button>ログイン</button>
-        </div>
-        <div>
-          ユーザー登録は<Link to={'/signup'}>こちら</Link>から
-        </div>
-      </form>
+
+      </div>
     </div>
   )
 };

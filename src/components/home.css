@@ -1,14 +1,93 @@
-header {
-  display: flex;
+/* 【ヘッダー部分】 */
+.header {
+  background-color: RGB(100, 100, 100);
 }
-
+.header-contents {
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+}
 .logout-button {
   display: block;
+  margin: 0;
   margin-left: auto;
-  width: 100px;
+  width: auto;
+  height: 30px;  
 }
+.logout-button:hover {
+  background-color: rgba(206, 255, 0, 0.95);
+  font-weight: bolder;
+  transition: 0.3s;
+} 
 .add-todolist {
-  margin: auto;
-  width: 500px;
-  background-color: rgb(210 210 210);
+  justify-content: center;
+  align-items: center;
+}
+.openCreateNewTodoModal {
+  height: 30px;
+  display: block;
+}
+.openCreateNewTodoModal:hover {
+  font-weight: bolder;
+  transition: 0.3s;
+  background-color: rgba(206, 255, 0, 0.95);
+}
+.openCreateNewTodoModal > span {
+  font-size: larger;
+}
+/* select box */
+.sort-todo-totle {
+  font-size: 14px;
+  font-weight: bolder;
+  padding: 6px 3px 6px 10px;
+  color: rgb(253, 253, 253);
+}
+.sort-todo-box {
+  position: relative;
+  width: 70px;
+}
+.sort-todo-box::after {
+  position: absolute;
+  top: 30%; /* 矢印の位置 */
+  right: 10px; /* 矢印の位置 */
+  width: 6px; /* 矢印の大きさ */
+  height: 6px; /* 矢印の大きさ */
+  border-top: 2px solid #58504A; /* 矢印の線 */
+  border-right: 2px solid #58504A; /* 矢印の線 */
+  -webkit-transform: rotate(135deg); /* 矢印の傾き */
+  transform: rotate(135deg); /* 矢印の傾き */
+  pointer-events: none; /* 矢印部分もクリック可能にする */
+  content: ""; 
+}
+.sort-todo {
+  border-radius: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; 
+  width: 70px; /* セレクトボックスの幅 */
+  height: 30px; /* セレクトボックスの高さ */
+  background-color: rgb(240 240 240);  /* セレクトボックスの背景色 */
+  border: none; /* セレクトボックスのデフォルトの枠線を消す */
+  border-radius: 5px;  /* セレクトボックスの四隅の丸み */
+  color: #58504A;  /* セレクトボックスの文字色 */
+  padding: 5px; /* セレクトボックスの内側の余白 */
+  cursor: pointer;
+}
+select:focus {
+  outline: none; /* focus 時のデフォルトの枠線を消す */
+}
+::-ms-expand {
+  display: none;
+}
+.sort-todo:hover {
+  background-color: rgba(206, 255, 0, 0.95);
+  font-weight: bolder;
+}
+
+
+/* TODOリスト部分 */
+.todolist {
+  margin: 30px 0 auto;
+
 }

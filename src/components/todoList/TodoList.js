@@ -4,7 +4,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import styles from "./TodoList.css";
 import dayjs from 'dayjs';
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase.js"
 import EditIcon from '@mui/icons-material/Edit';
 import { useRef, useState } from "react";
 import { EditTodoList } from './EditTodoList';
@@ -18,7 +18,7 @@ function TodoList({text, limit, detail, id, state}) {
   
   // TODOリストを削除する
   const handleDeleteTodo = (e) => {
-    deleteDoc(doc(db, "todo", e));
+    deleteDoc(doc(db, "users", auth.currentUser.uid, "todos",e));
   };
   
   // TODOリストの編集画面のPOP
@@ -38,7 +38,8 @@ function TodoList({text, limit, detail, id, state}) {
   // stateのプルダウンの内容をfirebaseに送信する関数（クリックするたびに送信）
   const sendTodoState = useEffect(() => {
     const docId = id;
-    const docEdit = doc(db, "todo", docId);
+    const docEdit = doc(db, "users", auth.currentUser.uid, "todos", docId); 
+
     updateDoc(docEdit, {
       state:editTodoState
     })
@@ -73,7 +74,7 @@ function TodoList({text, limit, detail, id, state}) {
               <p>{text}</p>
             </div>
             <div className='todolist-limit'>
-              <p>期限{limitTime.format('YYYY-MM-DD HH:mm')}</p>
+              <p>期限：{limitTime.format('YYYY-MM-DD HH:mm')}</p>
             </div>
             <div className='state-select-box'>
               <select 
@@ -113,11 +114,10 @@ function TodoList({text, limit, detail, id, state}) {
           </div>
           <div 
             style={{
-              height: {detail} && showChildren ? `${childHeight}px` : "0px",
+              height: {detail} && showChildren ? "100%" : "0px",
               opacity: {detail} && showChildren ? 1 : 0,
               overflow: "hidden",
               backgroundColor: "rgb(240 240 240)",
-              transition: "height 0.1s linear, opacity 0.1s ease-in",
               borderRadius: "0 0 10px 10px",
             }}
           >

@@ -5,7 +5,7 @@ import "./EditTodoList.css";
 import { useState } from "react";
 import React from 'react'
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase.js"
 import CloseIcon from '@mui/icons-material/Close';
 
 export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id}) => {
@@ -38,37 +38,50 @@ export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id
     const docId = id;
     
     // ブラウザ上で記入したTODOリストをfirebaseに送信
-    const docEdit = doc(db, "todo", docId);
+  //   const docEdit = doc(db, "todo", docId);
+  //   updateDoc(docEdit, {
+  //     text:editTodoText,
+  //     detail:editTodoDetail,
+  //     limit:newLimit,
+  //   });
+  // }
+    const docEdit = doc(db, "users", auth.currentUser.uid, "todos", docId); 
     updateDoc(docEdit, {
       text:editTodoText,
       detail:editTodoDetail,
       limit:newLimit,
-    });
+      }
+    );
   }
   
 
   if (editShow) {
     return (
-      <div id="overlay" onClick={closeEditModal}>
-        <div id="content" onClick={(e) => e.stopPropagation()}>
+      <div id="overlay-edit" onClick={closeEditModal}>
+        <div id="content-edit" onClick={(e) => e.stopPropagation()}>
           <form>
-            <button onClick={closeEditModal}><CloseIcon /></button>
-            <div className='addTodoText_input'>
+            <div className='close-icon'>
+              <button onClick={closeEditModal}><CloseIcon /></button>
+            </div>
+            <div className='editTodoText-input'>
               <input 
                 type="text" 
                 defaultValue={text}
                 onChange={(e)=>setEditTodoText(e.target.value)}
               />
             </div>
-            <div className='addTodoDetail_input'>
-              <input 
+            <div className='editTodoDetail-input'>
+              <textarea
+                cols="20" 
+                rows="5"
                 type="text" 
                 defaultValue={detail}
                 onChange={(e) => setEditTodoDetail(e.target.value)}
               />
             </div>
-            <div className='addTodoLimit_input'>
+            <div className='editTodoLimit-input'>
               <input 
+                className="editTodoLimitDate-input"
                 type="date" 
                 id="date" 
                 name="期限日" 
@@ -76,6 +89,7 @@ export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id
                 onChange={(e) => setEditTodoLimitDate(e.target.value)}
               />
               <input 
+                className="editTodoLimitTime-input"
                 type="time" 
                 id="time" 
                 name="期限時刻"
@@ -83,7 +97,7 @@ export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id
                 onChange={(e) => setEditTodoLimitTime(e.target.value)}
               />
             </div>
-            <div className='addTodo_submit'>
+            <div className='editTodo-submit'>
               <button 
                 type="submit"
                 onClick={sendEditTodo}

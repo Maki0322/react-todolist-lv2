@@ -1,45 +1,144 @@
-.open {
-	cursor:pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
-  text-align: center;
+input {
+  border: none;
+  background-color: rgb(230 230 230);
 }
-#pop-up {
-	display: none; /* label でコントロールするので input は非表示に */
+#overlay-create{
+/*画面全体を覆う設定*/
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
+  z-index:2;
+  /*画面の中央に要素を表示させる設定*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.overlay {
-	display: none; /* input にチェックが入るまでは非表示に */
+#content-create{
+  z-index:3;
+  width:50%;
+  padding: 10px;
+  background:#fff;
 }
-#pop-up:checked + .overlay {
-	display: block;
-	z-index: 9999;
-	background-color: #00000070;
-	position: fixed;
-	width: 100%;
-	height: 100vh;
-	top: 0;
-	left: 0;
+
+/* 閉じるボタン */
+.close-icon {
+	text-align: end;
+	margin: 15px 5px 15px 0;
 }
-.window {
-	width: 90vw;
-	max-width: 380px;
-	height: 240px;
-	background-color: #ffffff;
-	border-radius: 6px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+
+/* 「タスクを入力」のエリア */
+.setTodoText-input {
+	text-align: center;
 }
-.text {
-	font-size: 18px;
-	margin: 0;
+.setTodoText-input input {
+	width: 85%;
+	margin-bottom: 10px;
+	padding: 6px;
+	font-size: 16px;
+	border-radius: 8px;
+	outline: none;
 }
-.close {
-	cursor:pointer;
+
+/* 「詳細を入力」のエリア */
+.setTodoDetail-input {
+	text-align: center;
+}
+.setTodoDetail-input textarea {
+	border: none;
+	width: 85%;
+  background-color: rgb(230 230 230);
+	padding: 6px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	line-height: 1.3;
+	border-radius: 8px;
+	outline: none;
+}
+
+/* 日時を入力するエリア */
+.setTodoLimit-input {
+	text-align: center;
+}
+.setTodoLimit-input input {
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	padding: 6px;
+	margin-right: 30px;
+	border-radius: 8px;
+}
+/* 期限日を選択するinput要素のクリック範囲を広げる */
+input[type=date]::-webkit-calendar-picker-indicator {
 	position: absolute;
-	top: 4px;
-	right: 4px;
-	font-size: 20px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+input[type="date"]::-webkit-inner-spin-button{
+	-webkit-appearance: none;
+}
+input[type="date"]::-webkit-clear-button{
+	-webkit-appearance: none;
+}
+input[type="date"]{
+	position: relative;
+}
+.setTodoLimitDate-input::after {
+	position: absolute;
+  top: 30%; /* 矢印の位置 */
+  right: 10px; /* 矢印の位置 */
+  width: 6px; /* 矢印の大きさ */
+  height: 6px; /* 矢印の大きさ */
+  border-top: 2px solid #58504A; /* 矢印の線 */
+  border-right: 2px solid #58504A; /* 矢印の線 */
+  -webkit-transform: rotate(135deg); /* 矢印の傾き */
+  transform: rotate(135deg); /* 矢印の傾き */
+  pointer-events: none; /* 矢印部分もクリック可能にする */
+  content: ""; 
+}
+/* 期限時間を選択するinput要素のクリック範囲を広げる */
+input[type=time]::-webkit-calendar-picker-indicator {
+	position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+input[type="time"]::-webkit-inner-spin-button{
+	-webkit-appearance: none;
+}
+input[type="time"]::-webkit-clear-button{
+	-webkit-appearance: none;
+}
+input[type="time"]{
+	position: relative;
+}
+.setTodoLimitTime-input::after {
+	position: absolute;
+  top: 30%; /* 矢印の位置 */
+  right: 10px; /* 矢印の位置 */
+  width: 6px; /* 矢印の大きさ */
+  height: 6px; /* 矢印の大きさ */
+  border-top: 2px solid #58504A; /* 矢印の線 */
+  border-right: 2px solid #58504A; /* 矢印の線 */
+  -webkit-transform: rotate(135deg); /* 矢印の傾き */
+  transform: rotate(135deg); /* 矢印の傾き */
+  pointer-events: none; /* 矢印部分もクリック可能にする */
+  content: ""; 
+}
+.setTodoLimitTime-input {
+	width: 70px;
+}
+
+/* 「送信」ボタン */
+.todo-submit {
+	text-align: end;
+	margin: 0 5px 10px 0;
+}
+.todo-submit button {
+	width: auto;
+	height: 30px; 
+	background-color: RGB(230, 230, 230);
 }

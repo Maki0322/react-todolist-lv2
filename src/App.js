@@ -11,7 +11,7 @@ import PublicRoute from './components/PublicRoute';
 function App() {
   return (
     <AuthProvider>
-      <div style={{ margin:'2em' }}>
+      <div>
         <BrowserRouter>
           <Routes>
             <Route 
