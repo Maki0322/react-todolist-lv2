@@ -8,7 +8,12 @@ import 'firebase/firestore';
 import UUID from 'uuidjs';
 
 function AddTodoList({createNewTodo, setCreateNewTodo}) {
-
+  
+  // モーダルウィンドウを閉じる
+  const closeCreateNewTodoModal = () => {
+    setCreateNewTodo(false)
+  }
+  
   
   // TODOの各値をuseStateで管理
   const [todoText, setTodoText] = useState("");
@@ -41,13 +46,9 @@ function AddTodoList({createNewTodo, setCreateNewTodo}) {
       timestamp: serverTimestamp(),
     }
     setDoc(docRef ,data);
-  }
-
-  
-  // モーダルウィンドウを閉じる
-  const closeCreateNewTodoModal = () => {
     setCreateNewTodo(false)
   }
+
   
   if(createNewTodo){
     return (
