@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import "./AddTodoList.css"
-import { doc, setDoc } from "firebase/firestore"
+import { doc, serverTimestamp, setDoc } from "firebase/firestore"
 import { auth, db } from "../../firebase.js"
 import 'firebase/firestore';
 import UUID from 'uuidjs';
@@ -38,6 +38,7 @@ function AddTodoList({createNewTodo, setCreateNewTodo}) {
       id:docId,
       state:"未着手",
       userId:auth.currentUser.uid,
+      timestamp: serverTimestamp(),
     }
     setDoc(docRef ,data);
   }

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import AddTodoList from "./todoList/AddTodoList";
 import TodoList from "./todoList/TodoList";
-import { collection, getDocs, onSnapshot } from "firebase/firestore"
+import { collection, getDocs, onSnapshot, orderBy, query } from "firebase/firestore"
 import "./home.css"
 import AddIcon from '@mui/icons-material/Add';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -33,12 +33,10 @@ const Home = () => {
   // TODOリストをfirebaseのusersというコレクションに追加する
   useEffect(() => {
     const postData = collection(db, "users", auth.currentUser.uid, "todos");
-    // getDocs(postData).then((querySnapshot) => {
-    //   setTodos(querySnapshot.docs.map((doc) => doc.data()))
-    // });
-
+    // 投稿順にTODOを並び変える
+    const q = query(postData, orderBy("timestamp", "asc"));
     // リアルタイムでデータを取得
-    onSnapshot(postData, (querySnapshot) => {
+    onSnapshot(q, (querySnapshot) => {
       setTodos(querySnapshot.docs.map((doc) => doc.data()))
     })
   }, [])
