@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import AddTodoList from "./todoList/AddTodoList";
 import TodoList from "./todoList/TodoList";
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, onSnapshot } from "firebase/firestore"
 import "./home.css"
 import AddIcon from '@mui/icons-material/Add';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -33,9 +33,14 @@ const Home = () => {
   // TODOリストをfirebaseのusersというコレクションに追加する
   useEffect(() => {
     const postData = collection(db, "users", auth.currentUser.uid, "todos");
-    getDocs(postData).then((querySnapshot) => {
+    // getDocs(postData).then((querySnapshot) => {
+    //   setTodos(querySnapshot.docs.map((doc) => doc.data()))
+    // });
+
+    // リアルタイムでデータを取得
+    onSnapshot(postData, (querySnapshot) => {
       setTodos(querySnapshot.docs.map((doc) => doc.data()))
-    });
+    })
   }, [])
   
 
@@ -76,7 +81,7 @@ const Home = () => {
         <div className="header-contents">
           <div className="add-todolist">
             <button className='openCreateNewTodoModal' onClick={openCreateNewTodoModal}>
-              新規タスクを追加<span>＋</span>
+              新規タスク<span>＋</span>
             </button>
             <AddTodoList
               createNewTodo={createNewTodo}
