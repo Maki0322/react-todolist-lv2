@@ -15,10 +15,15 @@ export const userIdInfo = createContext();
 const Home = () => {
   // サインアウトしているとログイン画面に遷移する
   const navigate = useNavigate();
-  const handleLogout = () => {
-    signOut(auth);
-    navigate('/login');
+  // ログアウトボタンを押すと、自動でログイン画面に遷移する
+  const handleLogout = async(event) => {
+    event.preventDefault();
+    signOut(auth)
+    .then(() => {
+      navigate('/login');
+    })
   };
+
 
   // 【TODOリストを管理】
   // TODOリストの内容をを管理
