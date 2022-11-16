@@ -27,9 +27,6 @@ export function AuthProvider({ children }) {
       unsubscribed();
     };
   }, []);
-
-
-
   
   return <AuthContext.Provider value={value}>
     {!loading && children}

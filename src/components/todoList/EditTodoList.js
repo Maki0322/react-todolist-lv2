@@ -9,42 +9,27 @@ import { auth, db } from "../../firebase.js"
 import CloseIcon from '@mui/icons-material/Close';
 
 export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id}) => {
-
-  // モーダルウィンドウを閉じる
-  const closeEditModal = () => {
-    setEditShow(false)
-  }
-
   // モーダルウィンドウを開いた際の期限日時の初期値を入れるため、limitTimeの値を加工する
   const defaultLimitDate=limitTime.format('YYYY-MM-DD')
   const defaultLimitTime=limitTime.format('HH:mm')
- 
+  
   // 各値をuseStateで設定、初期値は編集前のものを設定しておく
   const [editTodoText, setEditTodoText] = useState(text);
   const [editTodoDetail, setEditTodoDetail] = useState(detail);
   const [editTodoLimitDate, setEditTodoLimitDate] = useState(defaultLimitDate);
   const [editTodoLimitTime, setEditTodoLimitTime] = useState(defaultLimitTime);
-
+  
   // 期限日時をfirebaseに上手く送れるように加工する
   const newLim = [editTodoLimitDate, editTodoLimitTime];
   const newLimitDateTime = Date.parse(newLim)
   const newLimit = new Date(newLimitDateTime);
-
+  
   // 変更(送信)ボタンを押したときにはしる関数
   const sendEditTodo = (e) => {
     // 送信ボタンを押したときに、画面がリロードしないようにpreventDefaultが必要。
     e.preventDefault();
-
-    const docId = id;
-    
     // ブラウザ上で記入したTODOリストをfirebaseに送信
-  //   const docEdit = doc(db, "todo", docId);
-  //   updateDoc(docEdit, {
-  //     text:editTodoText,
-  //     detail:editTodoDetail,
-  //     limit:newLimit,
-  //   });
-  // }
+    const docId = id;
     const docEdit = doc(db, "users", auth.currentUser.uid, "todos", docId); 
     updateDoc(docEdit, {
       text:editTodoText,
@@ -55,7 +40,11 @@ export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id
     // モーダルウィンドウを閉じる
     setEditShow(false);
   }
-  
+
+  // モーダルウィンドウを閉じる関数
+  const closeEditModal = () => {
+    setEditShow(false)
+  }
 
   if (editShow) {
     return (

@@ -15,13 +15,13 @@ function TodoList({text, limit, detail, id, state}) {
   const time = limit.toDate()
   // toDate()で変換したそのままのデータは、「Sat Nov 26 2022 00:00:00 GMT+0900 (日本標準時)」って感じで使いにくいので、使いやすいようにDay.jsで変換
   const limitTime = dayjs(time);
-  
+
   // TODOリストを削除する
   const handleDeleteTodo = (e) => {
     deleteDoc(doc(db, "users", auth.currentUser.uid, "todos",e));
   };
-  
-  // TODOリストの編集画面のPOP
+
+  // TODOリストの編集画面のモーダルウィンドウ
   const [editShow, setEditShow] = useState(false)
   const openEditModal = () => {
     setEditShow(true)
@@ -39,7 +39,6 @@ function TodoList({text, limit, detail, id, state}) {
   const sendTodoState = useEffect(() => {
     const docId = id;
     const docEdit = doc(db, "users", auth.currentUser.uid, "todos", docId); 
-
     updateDoc(docEdit, {
       state:editTodoState
     })

@@ -1,16 +1,12 @@
 import { signOut } from "firebase/auth";
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import AddTodoList from "./todoList/AddTodoList";
 import TodoList from "./todoList/TodoList";
-import { collection, getDocs, onSnapshot, orderBy, query } from "firebase/firestore"
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
 import "./home.css"
-import AddIcon from '@mui/icons-material/Add';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-
-export const userIdInfo = createContext();
 
 const Home = () => {
   // サインアウトしているとログイン画面に遷移する
@@ -24,17 +20,9 @@ const Home = () => {
     })
   };
 
-
   // 【TODOリストを管理】
   // TODOリストの内容をを管理
   const [todos, setTodos] = useState([]);
-  // TODOリストをfirebaseのtodoというコレクションに追加する
-  // useEffect(() => {
-  //   const postData = collection(db, "todo");
-  //   getDocs(postData).then((querySnapshot) => {
-  //     setTodos(querySnapshot.docs.map((doc) => doc.data()))
-  //   });
-  // }, [])
   // TODOリストをfirebaseのusersというコレクションに追加する
   useEffect(() => {
     const postData = collection(db, "users", auth.currentUser.uid, "todos");
@@ -46,7 +34,6 @@ const Home = () => {
     })
   }, [])
   
-
   // 【フィルターボタン（<select>タグ）を実装】
   // フィルターボタンのプルダウンの内容
   const filterState = ["すべて", "未着手", "進行中", "完了"];
@@ -70,7 +57,6 @@ const Home = () => {
       }))
     }     
   }, [todos, filterTodo])
-
 
   // TODOリスト追加のモーダルウィンドウ
   const [createNewTodo, setCreateNewTodo] = useState(false)

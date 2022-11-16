@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import "./SignUp.css"
 
-
 const SignUp = () => {
   const navigate = useNavigate('');
   const [error, setError] = useState('');

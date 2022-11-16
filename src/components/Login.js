@@ -31,8 +31,7 @@ const Login = () => {
           break;
       }
     });
-  };
-  
+  }; 
 
   return (
     <div>
