@@ -1,6 +1,7 @@
 /* 【ヘッダー部分】 */
 .header {
   background-color: RGB(100, 100, 100);
+  min-width: 770px;
 }
 .header-contents {
   width: auto;
