@@ -52,6 +52,8 @@ export const EditTodoList = ({editShow, setEditShow, text, detail, limitTime, id
       limit:newLimit,
       }
     );
+    // モーダルウィンドウを閉じる
+    setEditShow(false);
   }
   
 

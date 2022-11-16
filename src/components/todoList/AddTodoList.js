@@ -46,6 +46,7 @@ function AddTodoList({createNewTodo, setCreateNewTodo}) {
       timestamp: serverTimestamp(),
     }
     setDoc(docRef ,data);
+    // モーダルウィンドウを閉じる
     setCreateNewTodo(false)
   }
 
