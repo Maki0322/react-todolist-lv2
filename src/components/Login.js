@@ -77,7 +77,7 @@ const Login = () => {
             </div>
           </form>
         </div>
-
+        <div>githubのテスト</div>
       </div>
     </div>
   )
